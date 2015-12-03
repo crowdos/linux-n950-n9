@@ -1,0 +1,3 @@
+[submodule "linux"]
+	path = linux
+	url = git@github.com:nemomobile/kernel-adaptation-n950-n9.git
