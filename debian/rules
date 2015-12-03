@@ -1,0 +1,46 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+VERSION=$(shell dpkg-parsechangelog -S version)
+REVISION=-$(shell dpkg-parsechangelog -S version|cut -d - -f 2)
+COS_KERNEL_ARCH=$(shell dpkg --print-architecture)
+
+ifeq ($(COS_KERNEL_ARCH),armhf)
+ARCH=arm
+IMAGE=zImage
+else
+ARCH=x86
+IMAGE=bzImage
+endif
+
+%:
+	dh $@ --with quilt --sourcedirectory=linux --parallel
+
+# linux/.scmversion from here:
+# http://stackoverflow.com/questions/19333918/dont-add-to-linux-kernel-version
+override_dh_auto_build:
+	touch linux/.scmversion
+	dh_quilt_patch
+	make -C linux KCONFIG_CONFIG=../kernel-config-$(COS_KERNEL_ARCH) EXTRAVERSION=$(REVISION)
+
+override_dh_auto_install:
+	mkdir -p $(PWD)/debian/tmp/boot/
+	make -C linux \
+		EXTRAVERSION=$(REVISION) \
+		KCONFIG_CONFIG=../kernel-config-$(COS_KERNEL_ARCH) \
+		INSTALL_MOD_PATH=$(PWD)/debian/tmp \
+		INSTALL_HDR_PATH=$(PWD)/debian/tmp/usr/ \
+		modules_install headers_install
+	mkdir -p debian/tmp/boot/
+	cp -a linux/System.map debian/tmp/boot/
+	cp -a linux/arch/$(ARCH)/boot/$(IMAGE) debian/tmp/boot/vmlinuz
+	depmod -a -b $(PWD)/debian/tmp/ $(VERSION)
+	dh_install --fail-missing
+
+override_dh_auto_clean:
+	make -C linux KCONFIG_CONFIG=../kernel-config-$(COS_KERNEL_ARCH) EXTRAVERSION=$(REVISION) distclean
+	rm -rf linux/.scmversion
+	rm -rf kernel-config-$(COS_KERNEL_ARCH).old
+	dh_auto_clean

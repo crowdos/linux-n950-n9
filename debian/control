@@ -1,0 +1,22 @@
+Source: linux-n950-n9
+Section: kernel
+Priority: optional
+Maintainer: Mohammed Sameer <msameer@foolab.org>
+Standards-Version: 3.9.5
+Build-Depends: debhelper, quilt, bc, kmod
+Build-Conflicts: lilo
+Homepage: https://www.kernel.org/
+
+Package: linux-image-n950-n9
+Depends: kmod, util-linux, ${misc:Depends}
+Provides: linux-image
+Architecture: any
+Description: Linux image for N9(50)
+ Linux kernel and modules needed for N9(50)
+
+Package: linux-headers-n950-n9
+Depends: ${misc:Depends}
+Provides: linux-headers
+Architecture: any
+Description: Linux image for N9(50) headers
+ Linux image for N9(50) headers
