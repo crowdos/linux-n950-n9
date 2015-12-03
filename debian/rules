@@ -23,7 +23,8 @@ endif
 override_dh_auto_build:
 	touch linux/.scmversion
 	dh_quilt_patch
-	make -C linux KCONFIG_CONFIG=../kernel-config-$(COS_KERNEL_ARCH) EXTRAVERSION=$(REVISION)
+	# For whatever reason ld complains about those being set (-Wl,-z,relro)
+	LDFLAGS="" make -C linux KCONFIG_CONFIG=../kernel-config-$(COS_KERNEL_ARCH) EXTRAVERSION=$(REVISION)
 
 override_dh_auto_install:
 	mkdir -p $(PWD)/debian/tmp/boot/
