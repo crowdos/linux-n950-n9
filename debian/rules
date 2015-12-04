@@ -23,6 +23,8 @@ endif
 override_dh_auto_build:
 	touch linux/.scmversion
 	dh_quilt_patch
+	# kernel/config_data.gz needs .config
+	cp kernel-config-$(COS_KERNEL_ARCH) linux/.config
 	# For whatever reason ld complains about those being set (-Wl,-z,relro)
 	LDFLAGS="" make -C linux KCONFIG_CONFIG=../kernel-config-$(COS_KERNEL_ARCH) EXTRAVERSION=$(REVISION)
 
@@ -42,6 +44,7 @@ override_dh_auto_install:
 
 override_dh_auto_clean:
 	make -C linux KCONFIG_CONFIG=../kernel-config-$(COS_KERNEL_ARCH) EXTRAVERSION=$(REVISION) distclean
+	rm -rf linux/.config
 	rm -rf linux/.scmversion
 	rm -rf kernel-config-$(COS_KERNEL_ARCH).old
 	dh_auto_clean
