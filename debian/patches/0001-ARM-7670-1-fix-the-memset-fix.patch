@@ -21,13 +21,13 @@ Signed-off-by: Nicolas Pitre <nico@linaro.org>
 Tested-by: Alexander Holler <holler@ahsoftware.de>
 Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
 ---
- arch/arm/lib/memset.S | 33 +++++++++++++--------------------
+ linux/arch/arm/lib/memset.S | 33 +++++++++++++--------------------
  1 file changed, 13 insertions(+), 20 deletions(-)
 
-diff --git a/arch/arm/lib/memset.S b/arch/arm/lib/memset.S
+diff --git a/linux/arch/arm/lib/memset.S b/linux/arch/arm/lib/memset.S
 index d912e73..94b0650 100644
---- a/arch/arm/lib/memset.S
-+++ b/arch/arm/lib/memset.S
+--- a/linux/arch/arm/lib/memset.S
++++ b/linux/arch/arm/lib/memset.S
 @@ -14,31 +14,15 @@
  
  	.text

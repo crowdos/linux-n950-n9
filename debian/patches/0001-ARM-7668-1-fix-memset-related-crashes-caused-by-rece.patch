@@ -96,10 +96,10 @@ Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
  arch/arm/lib/memset.S | 85 ++++++++++++++++++++++++++-------------------------
  1 file changed, 44 insertions(+), 41 deletions(-)
 
-diff --git a/arch/arm/lib/memset.S b/arch/arm/lib/memset.S
+diff --git a/linux/arch/arm/lib/memset.S b/linux/arch/arm/lib/memset.S
 index 650d5923..d912e73 100644
---- a/arch/arm/lib/memset.S
-+++ b/arch/arm/lib/memset.S
+--- a/linux/arch/arm/lib/memset.S
++++ b/linux/arch/arm/lib/memset.S
 @@ -19,9 +19,9 @@
  1:	subs	r2, r2, #4		@ 1 do we have enough
  	blt	5f			@ 1 bytes to align with?
