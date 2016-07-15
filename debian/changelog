@@ -1,3 +1,10 @@
+linux-n950-n9 (2.6.32-2cos) unstable; urgency=medium
+
+  * [433203d] rules: use the full path for depmod
+  * [0ffa325] add gbp configuration file
+
+ -- Mohammed Sameer <msameer@foolab.org>  Sat, 16 Jul 2016 00:42:54 +0300
+
 linux-n950-n9 (2.6.32-1cos) unstable; urgency=medium
 
   * Initial release.
