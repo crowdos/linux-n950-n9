@@ -10,13 +10,13 @@ Homepage: https://www.kernel.org/
 Package: linux-image-n950-n9
 Depends: kmod, util-linux, ${misc:Depends}
 Provides: linux-image
-Architecture: any
+Architecture: armhf
 Description: Linux image for N9(50)
  Linux kernel and modules needed for N9(50)
 
 Package: linux-headers-n950-n9
 Depends: ${misc:Depends}
 Provides: linux-headers
-Architecture: any
+Architecture: armhf
 Description: Linux image for N9(50) headers
  Linux image for N9(50) headers
