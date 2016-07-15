@@ -39,7 +39,7 @@ override_dh_auto_install:
 	mkdir -p debian/tmp/boot/
 	cp -a linux/System.map debian/tmp/boot/
 	cp -a linux/arch/$(ARCH)/boot/$(IMAGE) debian/tmp/boot/vmlinuz
-	depmod -a -b $(PWD)/debian/tmp/ $(VERSION)
+	/sbin/depmod -a -b $(PWD)/debian/tmp/ $(VERSION)
 	dh_install --fail-missing
 
 override_dh_auto_clean:
